@@ -13,7 +13,13 @@
       </b-navbar-item>
     </template>
     <template slot="end">
-      <b-navbar-item tag="div">
+      <b-navbar-item v-if="is_signin" tag="div">
+        <b-skeleton circle>
+        </b-skeleton>
+        <b-skeleton>
+        </b-skeleton>
+      </b-navbar-item>
+      <b-navbar-item v-else tag="div">
         <div class="buttons">
           <a class="button is-primary">
             <strong>Sign Up</strong>
@@ -37,7 +43,16 @@ Vue.use(Search)
 
 export default {
   name: 'NavHeader',
-  props: ["is_main"],
+  props: {
+    is_main: {
+      type: Boolean,
+      default: false
+    },
+    is_signin: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: {
     Search
   }

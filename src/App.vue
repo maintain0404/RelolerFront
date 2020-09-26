@@ -1,25 +1,30 @@
 <template>
   <div id="app">
     <NavHeader v-bind:is_main="true"></NavHeader>
-    <div class="container">
-      <div id="user-info">
+    <section>
+      <div class="container">
+        <div id="user-info">
+          <RiotIdInfo></RiotIdInfo>
+        </div>
+        <div id="matchs-info">
+          <Match></Match>
+        </div>
       </div>
-      <div id="matchs-info">
-        <Match></Match>
-      </div>
-    </div>
+    </section>
   </div>
 </template>
 
 <script>
 import NavHeader from './components/NavHeader.vue'
 import Match from './components/Match.vue'
+import RiotIdInfo from './components/RiotIdInfo.vue'
 
 export default {
   name: 'App',
   components: {
     NavHeader,
-    Match
+    Match,
+    RiotIdInfo
   }
 }
 </script>
