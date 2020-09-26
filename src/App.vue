@@ -1,31 +1,43 @@
 <template>
   <div id="app">
     <NavHeader v-bind:is_main="true"></NavHeader>
-    <section>
-      <div class="container">
-        <div id="user-info">
-          <RiotIdInfo></RiotIdInfo>
-        </div>
-        <div id="matchs-info">
-          <Match></Match>
-        </div>
-      </div>
-    </section>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import Buefy from 'buefy'
 import NavHeader from './components/NavHeader.vue'
-import Match from './components/Match.vue'
-import RiotIdInfo from './components/RiotIdInfo.vue'
+import SearchResult from './components/SearchResult.vue'
+import Search from './components/Search.vue'
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
+Vue.config.productionTip = false
+Vue.use(Buefy)
+
+const routes = [
+  { 
+    path: '/',
+    component: Search
+  },{
+    path: '/result',
+    component: SearchResult
+  }
+]
+
+const router = new VueRouter({
+  routes
+})
+
 
 export default {
   name: 'App',
   components: {
     NavHeader,
-    Match,
-    RiotIdInfo
-  }
+  },
+  router
 }
 </script>
 
