@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <NavHeader v-bind:is_main="true"></NavHeader>
+    <NavHeader v-bind:is_main="is_navbar_search"></NavHeader>
     <router-view></router-view>
   </div>
 </template>
@@ -10,32 +10,45 @@ import Vue from 'vue'
 import Buefy from 'buefy'
 import NavHeader from './components/NavHeader.vue'
 import SearchResult from './components/SearchResult.vue'
-import Search from './components/Search.vue'
+import Main from './components/Main.vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 Vue.use(Buefy)
 
-const routes = [
-  { 
-    path: '/',
-    component: Search
-  },{
-    path: '/result',
-    component: SearchResult
-  }
-]
-
 const router = new VueRouter({
-  routes
+  routes: [
+    { 
+      path: '/',
+      component: Main
+    },{
+      path: '/result',
+      component: SearchResult
+    }
+  ]
 })
 
 
 export default {
   name: 'App',
+  data: function(){
+    return {
+      is_navbar_search: false
+    }
+  },
+  watch:{
+    $route: function(to){
+      if(to.path == '/result' ){
+        this.is_navbar_search = true;
+      }
+      else if(to.path == '/'){
+        this.is_navbar_search = false;
+      }
+    }
+  },
   components: {
-    NavHeader,
+    NavHeader
   },
   router
 }
